@@ -25,19 +25,25 @@ export default {
   },
   methods: {
     async getAnswer() {
-      this.answer = "pensando";
-      const url = "https://yesno.wtf/api";
-      const { answer, image } = await fetch(url).then((response) =>
-        response.json()
-      );
-      this.answer = answer === "yes" ? "si!" : "no!";
-      this.img = image;
+      try {
+        this.answer = "pensando";
+        const url = "https://yesno.wtf/api";
+        const { answer, image } = await fetch(url).then((response) =>
+          response.json()
+        );
+        this.answer = answer === "yes" ? "si!" : "no!";
+        this.img = image;
+      } catch (error) {
+        console.log(error);
+        this.answer = "No se pudo cargar del API";
+        this.img = null;
+      }
     },
   },
   watch: {
     question(value, oldValue) {
       this.isValidQuestion = false;
-      console.log({ value, oldValue });
+      console.log({ value });
       if (!value.includes("?")) return;
       this.isValidQuestion = true;
       this.getAnswer();
