@@ -2,6 +2,7 @@
   <div>
     <h2>{{ cutsomTitle }}</h2>
     <p>{{ counter }} <sup>2</sup> = {{ getSquareCounter }}</p>
+    <p data-testid="counter">{{ counter }}</p>
     <div>
       <button @click="increment">+1</button>
       <button @click="decrement">-1</button>
@@ -35,13 +36,11 @@ export default {
     },
 
     getSquareValue() {
-      console.log("getSquareValue");
       return this.counter * this.counter;
     },
   },
   computed: {
     getSquareCounter() {
-      console.log("getSquareCounter");
       return this.counter * this.counter;
     },
     cutsomTitle() {
